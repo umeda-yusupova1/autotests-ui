@@ -15,7 +15,6 @@ class SidebarListItemComponent(BaseComponent):
         self.icon = Icon(page, 'Sidebar item', f'{identifier}-drawer-list-item-icon')
         self.title = Text(page,'Sidebar item title',f'{identifier}-drawer-list-item-title-text')
         self.button = Button(page, 'Sidebar item title', f'{identifier}-drawer-list-item-button')
-        self.url = re.compile(f'.*/#/{identifier}')
 
     def check_visible(self, title: str):
         self.icon.check_visible()
@@ -25,6 +24,6 @@ class SidebarListItemComponent(BaseComponent):
 
         self.button.check_visible()
 
-    def navigate(self):
+    def navigate(self, expected_url: re.Pattern[str]):
         self.button.click()
-        self.check_current_url(self.url)
+        self.check_current_url(expected_url)
